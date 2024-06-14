@@ -1,0 +1,38 @@
+#!/bin/bash
+
+clear
+
+echo "==============================
+C E  I N V O K E R  T O O L S
+==============================
+1. Attach Project
+2. Detach Project
+3. Show Instance List
+4. Show Resource List
+5. Exit
+"
+
+read -p "Enter Your Choice : " number
+
+case "$number" in
+
+1)  ./functions/attachproject.sh
+    ;;
+2)  ./functions/detachproject.sh
+    ;;
+3)  function="showinstancelist.sh"
+    source ./functions/chooseregion.sh
+    ;;
+4)  function="showresourcelist.sh"
+    source ./functions/chooseregion.sh
+    ;;
+#5)  ./functions/switchproject.sh
+#    ;;
+5) exit 0;;
+*) clear
+	echo
+	echo "HEY!!! ARE YOU NOT ABLE TO READ????"
+	echo
+	exit 0;;
+esac
+
