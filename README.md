@@ -18,3 +18,7 @@ Running this command on the main folder.
     $ ./rubick
 
 Before use features **Show Instance List (no.3)** and **Show Instance list (no.4)** you need to attach your user to the project with **Attach Project (no.1)** feature.
+
+## Documentation
+
+ - [Openstack comand list documentation](https://docs.openstack.org/python-openstackclient/pike/cli/command-list.html)
