@@ -16,7 +16,7 @@ DEFINE_PROJECT() {
 }
 
 ATTACH_PROJECT() {
-	openstack role add --user $userid_adminrc --project $projectid_cust member
+	openstack role add --user $userid_adminrc --project $projectid_cust l1
 }
 
 SHOW_USER_ROLE() {

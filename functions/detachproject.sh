@@ -16,7 +16,7 @@ DEFINE_PROJECT() {
 }
 
 DETACH_PROJECT() {
-	openstack role remove --user $userid_adminrc --project $projectid_cust member
+	openstack role remove --user $userid_adminrc --project $projectid_cust l1
 }
 
 SHOW_USER_ROLE() {
