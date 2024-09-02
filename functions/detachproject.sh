@@ -10,17 +10,12 @@ regions[WJV2]="wjv2-adminrc.sh"
 
 #DEFINE COMMMAND
 
-DEFINE_PROJECT() {
-	userid_adminrc=$(openstack user show $user_adminrc | awk '{print $4}' | head -9 | tail -1)
-	projectid_cust=$(openstack role assignment list --user $emailcust --user-domain neo.id | awk '{print $7}' | head -4 | tail -1)
-}
-
 DETACH_PROJECT() {
-	openstack role remove --user $userid_adminrc --project $projectid_cust l1
+	openstack role remove --user $user_adminrc --project $projectid_cust l1
 }
 
 SHOW_USER_ROLE() {
-	openstack role assignment list --user $userid_adminrc --names 
+	openstack role assignment list --user $user_adminrc --names 
 }
 
 
@@ -30,52 +25,47 @@ clear
 echo "==============================
 C E  I N V O K E R  T O O L S
 ==============================
--- Detach Project --"
+-- Attach Project --"
 echo
-read -p "Masukkan user adminrc : " user_adminrc
-read -p "Masukkan email pelanggan : " emailcust
+read -p "Masukkan nama user adminrc (misal: fauzi) : " user_adminrc
+read -p "Masukkan project id pelanggan (misal: 4201acc18a3948f79ebb9ba36451b3ee) : " projectid_cust
 
 
 #ATTACH PROJECT PROCESS
 echo
-read -p "Apakah anda yakin untuk detach user $user_adminrc pada project $emailcust ? [y/n] " konfirmasi
+read -p "Apakah anda yakin untuk detach user $user_adminrc pada project $projectid_cust? [y/n] " konfirmasi
 echo
 
 if [ "$konfirmasi" == "y" ]; then
-    for region in "${!regions[@]}"; do
-        source ./adminrc/${regions[$region]}
+	source ./adminrc/${regions[$region]}
         echo "Processing $region Region....."    
 	
-	#DEFINE PROJECT
-	DEFINE_PROJECT
-
-	#BEFORE ATTACH
+	#BEFORE DETACH
 	echo "$region - Before"
 	SHOW_USER_ROLE
 	echo
 
-	#DETACH PROJECT
+	#ATTACH PROJECT
 	DETACH_PROJECT
 	
-	#AFTER ATACH
+	#AFTER ATTACH
 	echo "$region - After"
 	SHOW_USER_ROLE
 	echo
-    done
 	
     SP=1
 	    
 else
-    echo "Oke, Goodbye...
+    echo "Oke, Sampai Jumpa...
     "
     exit 0
 fi
 
 
 if [ "$SP" == 1 ]; then
-    echo
     echo "Detach Project Berhasil...
     "
+    
 else
     echo "Detach Project tidak berhasil...
     "
@@ -83,4 +73,7 @@ fi
 
 read -p "Press Enter to Continue..."
 
-./rubick
+source ./functions/mainmenu.sh
+
+
+
