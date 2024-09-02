@@ -17,7 +17,7 @@ Running this command on the main folder.
 
     $ ./rubick
 
-Before use features you need to attach your user to the project with **Attach Project (no.1)** feature.
+Before use features you need to attach your user to the project with **Attach Project** feature.
 
 ## Documentation
 
